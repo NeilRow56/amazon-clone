@@ -1,6 +1,7 @@
 import './App.css';
 
 import Header from '../src/components/Header';
+import Home from '../src/components/Home';
 
 function App() {
 	return (
@@ -10,6 +11,7 @@ function App() {
 			<Header />
 
 			{/* Home */}
+			<Home />
 		</div>
 	);
 }

@@ -3,7 +3,7 @@ import { FaShoppingBasket, FaSearch } from 'react-icons/fa';
 
 function Header() {
 	return (
-		<div className="flex  w-full justify-between items-center h-[48px] px-4  bg-gray-700 text-white dark:bg-gray-900 sticky top-0 z-100  ">
+		<div className="flex  w-full justify-between items-center h-[48px] px-4  bg-gray-700 text-white dark:bg-gray-900 sticky top-0 z-50  ">
 			<div className="flex w-full justify-between max-w-[1500px] mx-auto">
 				<div className="flex  ">
 					<div className="my-auto  ">
