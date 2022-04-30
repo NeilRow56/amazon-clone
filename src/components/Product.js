@@ -3,7 +3,7 @@ import React from 'react';
 function Product({ id, title, image, price, rating }) {
 	return (
 		<div className="flex flex-col bg-white z-1 w-full max-h-[400px] text-center min-w-[100px] ">
-			<p>{title}</p>
+			<p className="mx-10 text-left">{title}</p>
 			<p className="flex items-center mt-[15px] w-full justify-center">
 				<small>£</small>
 				<strong>{price}</strong>
@@ -12,7 +12,7 @@ function Product({ id, title, image, price, rating }) {
 				{Array(rating)
 					.fill()
 					.map((_, i) => (
-						<p>⭐</p>
+						<p key={i}>⭐</p>
 					))}
 			</div>
 			<img
