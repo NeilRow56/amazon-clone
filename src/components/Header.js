@@ -1,21 +1,26 @@
 import React from 'react';
 import { FaShoppingBasket, FaSearch } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
+import { useStateValue } from './StateProvider';
 
 function Header() {
+	const [{ basket }] = useStateValue();
+
 	return (
 		<div className="flex  w-full justify-between items-center h-[48px] px-4  bg-gray-700 text-white dark:bg-gray-900 sticky top-0 z-50  ">
 			<div className="flex w-full justify-between max-w-[1500px] mx-auto">
 				<div className="flex  ">
 					<div className="my-auto  ">
-						<div className='mt-4 font-["Pacifico"]'>
-							<img
-								className="object-cover"
-								alt="amazon logo"
-								src="http://pngimg.com/uploads/amazon/amazon_PNG11.png"
-								width={80}
-								height={15}
-							/>
-							{/* <h2 className="text-3xl">Amazona</h2> */}
+						<div className="mt-4 ">
+							<Link to="/">
+								<img
+									className="object-cover"
+									alt="amazon logo"
+									src="http://pngimg.com/uploads/amazon/amazon_PNG11.png"
+									width={80}
+									height={15}
+								/>
+							</Link>
 						</div>
 					</div>
 
@@ -61,10 +66,12 @@ function Header() {
 							<div>Prime</div>
 						</div>
 						<div className="flex my-auto min-w-[50px]">
-							<div className="text-[26px] font-thin text-gray-200 pt-1">
-								<FaShoppingBasket />
-							</div>
-							<div className="ml-3 pt-2">0</div>
+							<Link to="/checkout">
+								<div className="text-[26px] font-thin text-gray-200 pt-1">
+									<FaShoppingBasket />
+								</div>
+							</Link>
+							<div className="ml-3 pt-2">{basket?.length}</div>
 						</div>
 					</div>
 				</div>
