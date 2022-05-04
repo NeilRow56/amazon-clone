@@ -47,12 +47,14 @@ function Header() {
 
 				<div className="flex  min-w-200px ">
 					<div className="flex space-x-5">
-						<div className="flex flex-col min-w-[50px]">
-							<div className="text-[10px] font-thin text-gray-200 pt-1">
-								Hello Guest
+						<Link to="/signin">
+							<div className="flex flex-col min-w-[50px]">
+								<div className="text-[10px] font-thin text-gray-200 pt-1">
+									Hello Guest
+								</div>
+								<div>Sign in</div>
 							</div>
-							<div>Sign in</div>
-						</div>
+						</Link>
 						<div className="flex flex-col min-w-[50px]">
 							<div className="text-[10px] font-thin text-gray-200 pt-1">
 								Returns
