@@ -1,7 +1,8 @@
 /* eslint-disable */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { UserAuth } from '../context/AuthContext';
+import { GoogleButton } from 'react-google-button';
 
 const SignIn = () => {
 	const [email, setEmail] = useState('');
@@ -9,7 +10,21 @@ const SignIn = () => {
 	const [error, setError] = useState('');
 
 	const navigate = useNavigate();
-	const { signIn } = UserAuth();
+	const { signIn, googleSignIn, user } = UserAuth();
+
+	const handleGoogleSignIn = async () => {
+		try {
+			await googleSignIn();
+		} catch (error) {
+			console.log(error);
+		}
+	};
+
+	useEffect(() => {
+		if (user != null) {
+			navigate('/account');
+		}
+	}, [user]);
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
@@ -32,6 +47,9 @@ const SignIn = () => {
 						Sign Up
 					</Link>{' '}
 				</p>
+			</div>
+			<div className="max-w-[240px] m-auto py-4">
+				<GoogleButton onClick={handleGoogleSignIn} />
 			</div>
 			<form onSubmit={handleSubmit}>
 				<div className="flex flex-col py-2">

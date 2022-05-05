@@ -1,8 +1,12 @@
+/* eslint-disable */
 import { createContext, useContext, useEffect, useState } from 'react';
 import {
 	createUserWithEmailAndPassword,
 	signInWithEmailAndPassword,
 	signOut,
+	GoogleAuthProvider,
+	signInWithPopup,
+	signInWithRedirect,
 	onAuthStateChanged,
 } from 'firebase/auth';
 import { auth } from '../components/firebase';
@@ -11,6 +15,11 @@ const UserContext = createContext();
 
 export const AuthContextProvider = ({ children }) => {
 	const [user, setUser] = useState({});
+
+	const googleSignIn = () => {
+		const provider = new GoogleAuthProvider();
+		signInWithPopup(auth, provider);
+	};
 
 	const createUser = (email, password) => {
 		return createUserWithEmailAndPassword(auth, email, password);
@@ -35,7 +44,9 @@ export const AuthContextProvider = ({ children }) => {
 	}, []);
 
 	return (
-		<UserContext.Provider value={{ createUser, user, logout, signIn }}>
+		<UserContext.Provider
+			value={{ createUser, user, logout, signIn, googleSignIn }}
+		>
 			{children}
 		</UserContext.Provider>
 	);

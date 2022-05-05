@@ -2,9 +2,25 @@ import React from 'react';
 import { FaShoppingBasket, FaSearch } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { useStateValue } from './StateProvider';
+import { UserAuth } from '../context/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 function Header() {
 	const [{ basket }] = useStateValue();
+
+	const navigate = useNavigate();
+
+	const { user, logout } = UserAuth();
+
+	const handleLogout = async () => {
+		try {
+			await logout();
+			navigate('/');
+			console.log('You are logged out');
+		} catch (error) {
+			console.log(error.message);
+		}
+	};
 
 	return (
 		<div className="flex  w-full justify-between items-center h-[48px] px-4  bg-gray-700 text-white dark:bg-gray-900 sticky top-0 z-50  ">
@@ -47,14 +63,29 @@ function Header() {
 
 				<div className="flex  min-w-200px ">
 					<div className="flex space-x-5">
-						<Link to="/signin">
-							<div className="flex flex-col min-w-[50px]">
-								<div className="text-[10px] font-thin text-gray-200 pt-1">
-									Hello Guest
+						<div className="mr-3 my-auto">{user?.displayName}</div>
+						{user ? (
+							// <Link to="/account">
+							// 	<div className=" min-w-[50px] ">
+							// 		<div className="block mt-3">Sign Out</div>
+							// 	</div>
+							// </Link>
+							<button
+								onClick={handleLogout}
+								className="bg-[#f0c14b] rounded-md my-3 w-[100px] mx-auto p-1 border border-[#a88734] text-gray-900"
+							>
+								Sign Out
+							</button>
+						) : (
+							<Link to="/signin">
+								<div className="flex flex-col min-w-[50px]">
+									<div className="text-[10px] font-thin text-gray-200 pt-1">
+										Hello Guest
+									</div>
+									<div>Sign in</div>
 								</div>
-								<div>Sign in</div>
-							</div>
-						</Link>
+							</Link>
+						)}
 						<div className="flex flex-col min-w-[50px]">
 							<div className="text-[10px] font-thin text-gray-200 pt-1">
 								Returns
